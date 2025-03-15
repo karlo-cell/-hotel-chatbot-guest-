@@ -17,11 +17,20 @@ const chatbot = document.getElementById('chatbot');
 const roomNumberInput = document.getElementById('room-number');
 const signinBtn = document.getElementById('signin-btn');
 
+// Add event listener to the sign-in button
 signinBtn.addEventListener('click', () => {
   const roomNumber = roomNumberInput.value.trim();
   if (roomNumber) {
+    // Hide the popup and show the chatbot
     signinPopup.style.display = 'none';
     chatbot.classList.remove('hidden');
+    // Save the room number to Firestore (optional)
+    db.collection('guests').doc(roomNumber).set({
+      roomNumber: roomNumber,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  } else {
+    alert("Please enter a valid room number.");
   }
 });
 
