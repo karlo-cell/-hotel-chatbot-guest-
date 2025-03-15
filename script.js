@@ -17,19 +17,25 @@ const chatbot = document.getElementById('chatbot');
 const roomNumberInput = document.getElementById('room-number');
 const signinBtn = document.getElementById('signin-btn');
 
+// Debugging: Log elements to ensure they are selected correctly
+console.log("Sign-in Popup:", signinPopup);
+console.log("Chatbot:", chatbot);
+console.log("Room Number Input:", roomNumberInput);
+console.log("Sign In Button:", signinBtn);
+
 // Add event listener to the sign-in button
 signinBtn.addEventListener('click', () => {
+  console.log("Sign In button clicked!");
+
   const roomNumber = roomNumberInput.value.trim();
+  console.log("Room number entered:", roomNumber);
+
   if (roomNumber) {
-    // Hide the popup and show the chatbot
+    console.log("Hiding popup and showing chatbot...");
     signinPopup.style.display = 'none';
     chatbot.classList.remove('hidden');
-    // Save the room number to Firestore (optional)
-    db.collection('guests').doc(roomNumber).set({
-      roomNumber: roomNumber,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    });
   } else {
+    console.log("No room number entered.");
     alert("Please enter a valid room number.");
   }
 });
